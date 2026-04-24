@@ -1,0 +1,11 @@
+
+body{margin:0;font-family:sans-serif;background:#0b0f1a;color:white}
+.app{padding:20px}
+.box{margin:40px auto;width:60%;padding:20px;background:rgba(255,255,255,0.05);border-radius:12px}
+.good{color:#4ade80}
+.bad{color:#f87171}
+input{width:100%;background:transparent;border:none;border-bottom:1px solid #888;color:white}
+.stats{display:flex;gap:20px;justify-content:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.leaderboard{margin-top:20px}
+.row{display:flex;justify-content:space-between;width:200px}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="SickType logo">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#45d7ff"/>
+      <stop offset="50%" stop-color="#8b7bff"/>
+      <stop offset="100%" stop-color="#ff71c8"/>
+    </linearGradient>
+    <linearGradient id="text" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#d6e6ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bg)"/>
+  <path d="M36 42h56v12H36zM36 58h38v12H36zM36 74h30v12H36z" fill="rgba(9,16,30,0.28)"/>
+  <path d="M70 34h8v60h-8z" fill="url(#text)"/>
+  <circle cx="74" cy="96" r="4" fill="url(#text)"/>
+</svg>
+

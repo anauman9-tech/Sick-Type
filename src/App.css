@@ -346,50 +346,100 @@
   overflow: hidden;
 }
 
+.lockable-content {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.lockable-content > :not(.soft-glass-overlay) {
+  opacity: 0.42;
+  filter: saturate(0.72) contrast(0.92) blur(0.35px);
+  transition: opacity 180ms ease;
+}
+
 .soft-glass-overlay {
   position: absolute;
   inset: 0;
   z-index: 5;
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
   text-align: center;
-  border-radius: 16px;
+  border-radius: 14px;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
-    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 46%),
-    radial-gradient(circle at 78% 84%, rgba(132, 213, 255, 0.18), rgba(132, 213, 255, 0) 42%),
-    rgba(9, 16, 30, 0.28);
-  backdrop-filter: blur(18px) saturate(1.35);
-  -webkit-backdrop-filter: blur(18px) saturate(1.35);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.04)),
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 46%),
+    radial-gradient(circle at 78% 84%, rgba(132, 213, 255, 0.14), rgba(132, 213, 255, 0) 42%),
+    rgba(9, 16, 30, 0.26);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
     inset 0 -10px 26px rgba(103, 154, 255, 0.14),
-    0 18px 38px rgba(7, 12, 23, 0.24);
+    0 18px 38px rgba(7, 12, 23, 0.2);
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 66%, rgba(0, 0, 0, 0.1) 92%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 66%, rgba(0, 0, 0, 0.1) 92%, rgba(0, 0, 0, 0) 100%);
 }
 
 .soft-glass-overlay.small {
   inset: 0.4rem;
 }
 
-.soft-glass-overlay.content-only {
-  top: 3.05rem;
+.social-disabled-wrap > article {
+  opacity: 0.4;
+  filter: saturate(0.72) contrast(0.9) blur(0.35px);
 }
 
-.friends-board-disabled-wrap .soft-glass-overlay.content-only {
-  top: 2.95rem;
+.social-full-lock {
+  position: absolute;
+  inset: 0.4rem;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-align: center;
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.05)),
+    radial-gradient(circle at 16% 14%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 45%),
+    radial-gradient(circle at 82% 82%, rgba(129, 196, 255, 0.16), rgba(129, 196, 255, 0) 44%),
+    rgba(10, 18, 34, 0.3);
+  backdrop-filter: blur(20px) saturate(1.45);
+  -webkit-backdrop-filter: blur(20px) saturate(1.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -12px 28px rgba(104, 160, 255, 0.14),
+    0 18px 40px rgba(7, 12, 23, 0.22);
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 67%, rgba(0, 0, 0, 0.12) 92%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 67%, rgba(0, 0, 0, 0.12) 92%, rgba(0, 0, 0, 0) 100%);
+}
+
+.social-full-lock strong {
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: #eef6ff;
+}
+
+.social-full-lock span {
+  max-width: 30ch;
+  color: #d3deef;
+  font-size: 0.9rem;
 }
 
 .soft-glass-overlay strong {
   font-size: 1rem;
   letter-spacing: 0.02em;
+  color: #edf6ff;
 }
 
 .soft-glass-overlay span {
-  color: var(--text-muted);
+  color: #d3deef;
   font-size: 0.86rem;
 }
 
@@ -573,13 +623,21 @@
 .ad-box {
   border: 1px dashed var(--panel-border);
   border-radius: 12px;
-  min-height: 78px;
-  display: grid;
-  place-items: center;
+  width: min(320px, 100%);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  overflow: hidden;
+  display: block;
   color: var(--text-muted);
   text-align: center;
-  padding: 0.45rem 0.65rem;
+  padding: 0;
   font-size: 0.84rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.adsbygoogle {
+  width: 100%;
+  height: 100%;
 }
 
 .modal-actions {

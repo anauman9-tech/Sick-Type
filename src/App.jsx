@@ -13,6 +13,8 @@ const USERS_KEY = 'sicktype.users'
 const SESSIONS_KEY = 'sicktype.sessions'
 const ACTIVE_USER_KEY = 'sicktype.activeUser'
 const THEME_KEY = 'sicktype.theme'
+const ADSENSE_CLIENT = 'ca-pub-1868198307031706'
+const ADSENSE_RESULT_SLOT = import.meta.env.VITE_ADSENSE_RESULT_SLOT || '2218296380'
 
 function makeWords(length = 70, allowNumbers = false, allowPunctuation = false) {
   const source = [...WORD_BANK]
@@ -147,6 +149,16 @@ export default function App() {
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
+  }, [showResults])
+
+  useEffect(() => {
+    if (!showResults) return
+    if (!window?.adsbygoogle) return
+    try {
+      window.adsbygoogle.push({})
+    } catch {
+      // AdSense may throw if an ad instance is already initialized.
+    }
   }, [showResults])
 
   const friendLeaderboard = useMemo(() => {
@@ -385,9 +397,9 @@ export default function App() {
               </div>
             )}
           </article>
-          <div className="soft-glass-overlay content-only">
+          <div className="social-full-lock">
             <strong>Multiplayer coming soon</strong>
-            <span>Friends and live room races are temporarily paused.</span>
+            <span>Friends, room races, and live duels are being rebuilt for a premium release.</span>
           </div>
         </section>
       )}
@@ -396,10 +408,12 @@ export default function App() {
         <section className="glass panel leaderboard-grid">
           <article className="glass panel friends-board-disabled-wrap">
             <h3>Friends leaderboard</h3>
-            <ol>{friendLeaderboard.map((e) => <li key={e.userId}><span>@{users.find((u) => u.id === e.userId)?.name || 'unknown'}</span><strong>{e.wpm} WPM</strong></li>)}</ol>
-            <div className="soft-glass-overlay content-only small">
-              <strong>Coming soon</strong>
-              <span>Friends leaderboard returns with multiplayer.</span>
+            <div className="lockable-content">
+              <ol>{friendLeaderboard.map((e) => <li key={e.userId}><span>@{users.find((u) => u.id === e.userId)?.name || 'unknown'}</span><strong>{e.wpm} WPM</strong></li>)}</ol>
+              <div className="soft-glass-overlay small">
+                <strong>Coming soon</strong>
+                <span>Friends leaderboard returns with multiplayer.</span>
+              </div>
             </div>
           </article>
           <article className="glass panel">
@@ -436,7 +450,16 @@ export default function App() {
               </article>
             </div>
             <div className="ad-slot">
-              <div className="ad-box">Your sponsored block can render here on results only.</div>
+              <div className="ad-box">
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: 'block', width: '100%', height: '100%' }}
+                  data-ad-client={ADSENSE_CLIENT}
+                  data-ad-slot={ADSENSE_RESULT_SLOT}
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                />
+              </div>
             </div>
             <div className="mode-pills modal-actions">
               <button type="button" className="restart" onClick={() => handleRestart()}>Play again</button>
